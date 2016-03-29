@@ -1,0 +1,8 @@
+<span class="button-container">
+    <plat-button class="button-primary button-outline" plat-tap="newPost()">New Post</plat-button>
+</span>
+<plat-foreach plat-context="posts" class="post-list">
+    <h1>{{title}}</h1>
+    <h3>{{author}}</h3>
+    <h3>{{createdAt}}</h3>
+</plat-foreach>
