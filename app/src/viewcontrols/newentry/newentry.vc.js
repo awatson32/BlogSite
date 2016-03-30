@@ -6,15 +6,37 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var platypus_1 = require('platypus');
 var base_vc_1 = require('../base/base.vc');
+var posts_repo_1 = require('../../repositories/posts/posts.repo');
+var home_vc_1 = require('../home/home.vc');
 var NewentryViewControl = (function (_super) {
     __extends(NewentryViewControl, _super);
-    function NewentryViewControl() {
-        _super.apply(this, arguments);
+    function NewentryViewControl(postRepo) {
+        _super.call(this);
+        this.postRepo = postRepo;
         this.templateString = require('./newentry.vc.html');
-        this.context = {};
+        this.context = {
+            title: '',
+            author: '',
+            content: ''
+        };
     }
+    NewentryViewControl.prototype.submit = function () {
+        var _this = this;
+        console.log('We are posting!');
+        var blogPost = {
+            title: this.context.title,
+            author: this.context.author,
+            content: this.context.content
+        };
+        this.postRepo.submitPost(blogPost).then(function (success) {
+            console.log(success);
+            _this.navigator.navigate(home_vc_1.default);
+        }, function (err) {
+            console.log(err);
+        });
+    };
     return NewentryViewControl;
 }(base_vc_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = NewentryViewControl;
-platypus_1.register.viewControl('newentry-vc', NewentryViewControl);
+platypus_1.register.viewControl('newentry-vc', NewentryViewControl, [posts_repo_1.default]);

@@ -11,6 +11,14 @@ export default class PostsRepository extends BaseRepository {
     getPosts(): async.IThenable<Array<models.IPost>> {
         return this.entriesService.getPosts();
     }
+    
+    submitPost(post: models.IPost): async.IThenable<string> {
+        return this.entriesService.submitPost(post);
+    } 
+    
+    getPost(postId: string): async.IThenable<models.IPost> {
+        return this.entriesService.getPost(postId);
+    }
 }
 
 register.injectable('posts-repo', PostsRepository, [EntriesService]);

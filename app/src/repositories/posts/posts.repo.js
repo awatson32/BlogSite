@@ -16,6 +16,12 @@ var PostsRepository = (function (_super) {
     PostsRepository.prototype.getPosts = function () {
         return this.entriesService.getPosts();
     };
+    PostsRepository.prototype.submitPost = function (post) {
+        return this.entriesService.submitPost(post);
+    };
+    PostsRepository.prototype.getPost = function (postId) {
+        return this.entriesService.getPost(postId);
+    };
     return PostsRepository;
 }(base_repo_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });

@@ -4,18 +4,7 @@ declare module models {
         author: string;
         content: string;
         id?: string;
+        createdAt?: Date;
     }
-    interface IResponse {
-        status: string;
-        message?: string;
-        data?: any;
-        errors?: Array<Error>;
-    }
-}
 
-declare module contexts {
-    interface IHome {
-        posts: Array<models.IPost>;
-    }
 }
-

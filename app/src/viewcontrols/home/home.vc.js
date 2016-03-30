@@ -6,28 +6,43 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var platypus_1 = require('platypus');
 var base_vc_1 = require('../base/base.vc');
-var entries_svc_1 = require('../../services/entries/entries.svc');
+var posts_repo_1 = require('../../repositories/posts/posts.repo');
+var newentry_vc_1 = require('../newentry/newentry.vc');
+var singlepost_vc_1 = require('../singlepost/singlepost.vc');
 var HomeViewControl = (function (_super) {
     __extends(HomeViewControl, _super);
-    function HomeViewControl(entriesService) {
+    function HomeViewControl(postRepo) {
         _super.call(this);
-        this.entriesService = entriesService;
+        this.postRepo = postRepo;
         this.templateString = require('./home.vc.html');
         this.context = {
-            posts: []
+            posts: [],
+            composeView: newentry_vc_1.default
         };
     }
     ;
     HomeViewControl.prototype.navigatedTo = function () {
         var _this = this;
-        this.entriesService.getPosts().then(function (posts) {
+        this.postRepo.getPosts().then(function (posts) {
             console.log(posts);
             _this.context.posts = posts;
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    HomeViewControl.prototype.newPost = function () {
+        this.navigator.navigate(newentry_vc_1.default);
+    };
+    HomeViewControl.prototype.singlePost = function (postId) {
+        console.log('This is working');
+        this.navigator.navigate(singlepost_vc_1.default, {
+            parameters: {
+                someId: postId
+            }
         });
     };
     return HomeViewControl;
 }(base_vc_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = HomeViewControl;
-console.log("Hello world");
-platypus_1.register.viewControl('home-vc', HomeViewControl, [entries_svc_1.default]);
+platypus_1.register.viewControl('home-vc', HomeViewControl, [posts_repo_1.default]);

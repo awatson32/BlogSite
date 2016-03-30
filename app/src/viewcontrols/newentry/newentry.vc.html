@@ -1,8 +1,8 @@
 <div class="input-group-container" id="post-container">
     <div class="input-group" id="new-blog">
-        <plat-input type="text" placeholder="Title"></plat-input>
-        <plat-input type="text" placeholder="Author"></plat-input>
-        <plat-input type="text" placeholder="What's happening?"></plat-input>
-        <plat-button class="button-primary button-outline">Submit</plat-button>
+        <plat-input type="text" placeholder="Title" plat-bind="title"></plat-input>
+        <plat-input type="text" placeholder="Author" plat-bind="author"></plat-input>
+        <plat-input type="text" placeholder="What's happening?" plat-bind="content"></plat-input>
+        <plat-button plat-tap="submit()" class="button-primary button-outline">Submit</plat-button>
     </div>
 </div>
